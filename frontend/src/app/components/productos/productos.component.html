@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row">
+        <div class="col s6">
+            <div class="card">
+                <h2 class="card-panel teal lighten-2">Acciones</h2>
+                <div class="card-content">
+                    <form #productoForm = "ngForm" (ngSubmit)="addProducto(productoForm)">
+                        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)] = "productoService.selectedProducto._id">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" name="clave" #clave="ngModel" [(ngModel)]="productoService.selectedProducto.clave" placeholder="Ingresa Clave">
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="text" name="producto" #producto="ngModel" [(ngModel)]="productoService.selectedProducto.producto" placeholder="Nombre del producto">
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="text" name="clasificacion" #clasificacion="ngModel" [(ngModel)]="productoService.selectedProducto.clasificacion" placeholder="Clasificacion">
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="number" name="cantidad" #cantidad="ngModel" [(ngModel)]="productoService.selectedProducto.cantidad" placeholder="Cantidad">
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="number" name="precioventa" #precioventa="ngModel" [(ngModel)]="productoService.selectedProducto.precioventa" placeholder="Precio Venta">
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="number" name="preciocompra" #preciocompra="ngModel" [(ngModel)]="productoService.selectedProducto.preciocompra" placeholder="Precio Compra">
+                            </div>
+                            <div class="card-action">
+                                <div class="input-field col s12">
+                                    <button class="btn right">Guardar</button>
+                                    <button class="btn right" (click)="resetForm(productoForm)">Borrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s6">
+            <table>
+                <thead>
+                    <th>Clave</th>
+                    <th>Producto</th>
+                    <th>Clasificacion</th>
+                    <th>Cantidad</th>
+                    <th>Precio Venta</th>  
+                    <th>Precio Compra</th>
+                    <th>Operacion</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let producto of productoService.productos">
+                        <td>{{ producto.clave }}</td>
+                        <td>{{ producto.producto }}</td>
+                        <td>{{ producto.clasificacion }}</td>
+                        <td>{{ producto.cantidad }}</td>
+                        <td>{{ producto.precioventa }}</td>
+                        <td>{{ producto.preciocompra }}</td>
+                        <td>
+                            <a (click)="editProducto(producto)">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <a (click)="deleteProducto(producto._id)">
+                                <i class="material-icons">delete_forever</i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</div>
